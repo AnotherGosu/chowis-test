@@ -1,23 +1,14 @@
 import styled from "styled-components";
-import { useModalContext } from "context/modalContext";
+import { useState } from "react";
 
-import { ReactComponent as ModalCloseIcon } from "images/modal-close-icon.svg";
-import { ReactComponent as GmailIcon } from "images/gmail-icon.svg";
-import { ReactComponent as KakaoIcon } from "images/kakao-icon.svg";
+import InputMailIcon from "images/input-mail-icon.svg";
+import InputPasswordIcon from "images/input-password-icon.svg";
 
 import Button from "components/common/Button";
 
-const LoginFormContainer = styled.div`
-  position: relative;
-  padding: 45px;
+const LoginFormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: #ffffff;
-  box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.15);
-  border-radius: 30px;
-  color: #1a1d1f;
-  font-weight: 600;
 `;
 
 const Title = styled.h2`
@@ -29,16 +20,6 @@ const Description = styled.span`
   margin-top: 25px;
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 17px;
-  right: 17px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  background-color: transparent;
-`;
-
 const InputsWrapper = styled.div`
   margin: 20px 0 25px 0;
   display: flex;
@@ -46,81 +27,84 @@ const InputsWrapper = styled.div`
   gap: 10px;
 `;
 
-const Divider = styled.div`
-  margin: 45px 0;
-  width: 100%;
-  height: 2px;
-  background: #efefef;
-  border-radius: 2px;
+const LoginLabel = styled.label`
+  position: relative;
+
+  ::after {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    display: block;
+    content: "";
+    width: 25px;
+    height: 25px;
+  }
 `;
 
-const AlternativeText = styled.span`
-  color: ${(props) => props.theme["gs-600"]};
+const EmailLabel = styled(LoginLabel)`
+  ::after {
+    background: no-repeat center url(${InputMailIcon});
+  }
 `;
 
-const AlternativeTextHighlight = styled.span`
-  color: ${(props) => props.theme["pr-600"]};
+const PasswordLabel = styled(LoginLabel)`
+  ::after {
+    background: no-repeat center url(${InputPasswordIcon});
+  }
 `;
 
-const AlternativeOptionsContainer = styled.div`
-  padding-top: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
-`;
+const LoginInput = styled.input`
+  padding: 12px 50px;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  background-color: #f4f4f4;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
 
-const AlternativeOption = styled.button`
-  width: 53px;
-  height: 53px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 2px solid #eeeeee;
-  background-color: transparent;
-  cursor: pointer;
-  transition: ${(props) => props.theme["transition-main"]};
-
-  :hover {
-    border-color: ${(props) => props.theme["gs-200"]};
+  ::placeholder {
+    color: #9a9fa5;
   }
 `;
 
 export default function LoginForm() {
-  const { toggleModal } = useModalContext();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const onContainerClick = (e: React.FormEvent<HTMLDivElement>) => {
-    //Prevent modal closing on children click
-    e.stopPropagation();
+  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setEmail(e.target.value);
+  };
+
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setPassword(e.target.value);
   };
 
   return (
-    <LoginFormContainer onClick={onContainerClick}>
-      <CloseButton onClick={toggleModal}>
-        <ModalCloseIcon />
-      </CloseButton>
+    <LoginFormContainer>
       <Title>Login</Title>
       <Description>Or continue with email address</Description>
       <InputsWrapper>
-        <input />
-        <input />
+        <EmailLabel>
+          <LoginInput
+            value={email}
+            onChange={onEmailChange}
+            placeholder="Your email"
+            type="email"
+            autoFocus
+          />
+        </EmailLabel>
+        <PasswordLabel>
+          <LoginInput
+            value={password}
+            onChange={onPasswordChange}
+            placeholder="Your password"
+            type="password"
+          />
+        </PasswordLabel>
       </InputsWrapper>
       <Button text="Login" width="300px" />
-      <Divider />
-      <AlternativeText>
-        Or
-        <AlternativeTextHighlight> sign up</AlternativeTextHighlight> with Open
-        account
-      </AlternativeText>
-      <AlternativeOptionsContainer>
-        <AlternativeOption>
-          <GmailIcon />
-        </AlternativeOption>
-        <AlternativeOption>
-          <KakaoIcon />
-        </AlternativeOption>
-      </AlternativeOptionsContainer>
     </LoginFormContainer>
   );
 }
