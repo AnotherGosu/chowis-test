@@ -1,13 +1,14 @@
 import styled from "styled-components";
-import { ButtonHTMLAttributes } from "react";
+import { Link } from "react-router-dom";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonLinkProps = {
   text: string;
+  path: string;
   isWhite?: boolean;
   width?: string;
-}
+};
 
-const StyledButton = styled.button<{ isWhite: boolean; width: string }>`
+const StyledLink = styled(Link)<{ isWhite: boolean; width: string }>`
   padding: 12px 15px;
   width: ${(props) => props.width};
   background-color: ${(props) =>
@@ -16,6 +17,7 @@ const StyledButton = styled.button<{ isWhite: boolean; width: string }>`
   font-size: 14px;
   font-weight: 500;
   font-family: "Inter", sans-serif;
+  text-decoration: none;
   border: 1px solid transparent;
   border-radius: 8px;
   outline: none;
@@ -30,15 +32,17 @@ const StyledButton = styled.button<{ isWhite: boolean; width: string }>`
   }
 `;
 
-export default function Button({
+// Some buttons are actually Links
+// They have the same style but act differently
+export default function ButtonLink({
   text,
+  path,
   isWhite = false,
   width = "max-content",
-  ...rest
-}: ButtonProps) {
+}: ButtonLinkProps) {
   return (
-    <StyledButton isWhite={isWhite} width={width} {...rest}>
+    <StyledLink to={path} isWhite={isWhite} width={width}>
       {text}
-    </StyledButton>
+    </StyledLink>
   );
 }
