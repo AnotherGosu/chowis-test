@@ -3,9 +3,12 @@ import { InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: string;
+  variant?: "filled" | "outline";
 }
 
-const StyledLabel = styled.label<{ icon?: string }>`
+const StyledLabel = styled.label<{
+  icon?: string;
+}>`
   position: relative;
 
   ::after {
@@ -15,32 +18,40 @@ const StyledLabel = styled.label<{ icon?: string }>`
     transform: translateY(-50%);
     display: block;
     content: "";
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
     background: ${({ icon }) =>
       icon ? `no-repeat center url(${icon})` : "none"};
   }
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{ variant?: "filled" | "outline" }>`
   padding: 12px 50px;
   border: none;
   outline: none;
   border-radius: 12px;
-  background-color: #f4f4f4;
+  background-color: ${({ variant }) =>
+    variant === "filled" ? "#F4F4F4" : "#FFFFFF"};
+  border: 1px solid;
+  border-color: ${({ variant }) =>
+    variant === "filled" ? "transparent" : "#CDCDCD"};
   font-family: "Inter", sans-serif;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
 
   ::placeholder {
     color: #9a9fa5;
   }
 `;
 
-export default function Input({ icon, ...rest }: InputProps) {
+export default function Input({
+  icon,
+  variant = "outline",
+  ...rest
+}: InputProps) {
   return (
     <StyledLabel icon={icon}>
-      <StyledInput {...rest} />
+      <StyledInput variant={variant} {...rest} />
     </StyledLabel>
   );
 }

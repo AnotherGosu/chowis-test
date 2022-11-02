@@ -19,6 +19,7 @@ const StyledModal = styled.div`
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(30px);
+  z-index: 100;
 `;
 
 const ModalContent = styled.div`

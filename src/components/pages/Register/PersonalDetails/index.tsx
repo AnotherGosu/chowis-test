@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { REGISTER_FORM_ACTIONTYPE } from "types/actionTypes";
 
 import InputUserIcon from "images/input-user-icon.svg";
 
@@ -7,8 +8,7 @@ import Input from "components/common/Input";
 type PersonalDetailsProps = {
   firstName: string;
   lastName: string;
-  setFirstName: React.Dispatch<React.SetStateAction<string>>;
-  setLastName: React.Dispatch<React.SetStateAction<string>>;
+  dispatch: React.Dispatch<REGISTER_FORM_ACTIONTYPE>;
 };
 
 const PersonalDetailsWrapper = styled.div`
@@ -25,14 +25,20 @@ const Description = styled.span`
 export default function PersonalDetails({
   firstName,
   lastName,
-  setFirstName,
-  setLastName,
+  dispatch,
 }: PersonalDetailsProps) {
   const onFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFirstName(e.target.value);
+    dispatch({
+      type: "setUserData",
+      payload: { name: "firstName", value: e.target.value },
+    });
   };
+
   const onLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLastName(e.target.value);
+    dispatch({
+      type: "setUserData",
+      payload: { name: "lastName", value: e.target.value },
+    });
   };
 
   return (

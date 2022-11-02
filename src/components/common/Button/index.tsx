@@ -18,8 +18,6 @@ const StyledButton = styled.button<{ isWhite: boolean; width: string }>`
   font-family: "Inter", sans-serif;
   border: 1px solid transparent;
   border-radius: 8px;
-  outline: none;
-  cursor: pointer;
   transition: ${(props) => props.theme["transition-main"]};
 
   :hover {
@@ -37,7 +35,7 @@ export default function Button({
   ...rest
 }: ButtonProps) {
   return (
-    <StyledButton isWhite={isWhite} width={width} {...rest}>
+    <StyledButton isWhite={isWhite} width={width} type="button" {...rest}>
       {text}
     </StyledButton>
   );

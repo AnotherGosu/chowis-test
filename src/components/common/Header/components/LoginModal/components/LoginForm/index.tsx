@@ -40,12 +40,12 @@ export default function LoginForm() {
     setPassword(e.target.value);
   };
 
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onLoginFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
   return (
-    <LoginFormContainer onSubmit={onFormSubmit}>
+    <LoginFormContainer onSubmit={onLoginFormSubmit}>
       <Title>Login</Title>
       <Description>Or continue with email address</Description>
       <InputsWrapper>
@@ -56,6 +56,7 @@ export default function LoginForm() {
           type="email"
           autoFocus
           icon={InputMailIcon}
+          variant="filled"
         />
         <Input
           value={password}
@@ -63,6 +64,7 @@ export default function LoginForm() {
           placeholder="Your password"
           type="password"
           icon={InputPasswordIcon}
+          variant="filled"
         />
       </InputsWrapper>
       <Button text="Login" width="300px" type="submit" />

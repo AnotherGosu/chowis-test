@@ -1,11 +1,15 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useReducer } from "react";
+import { reducer, initialState } from "./registerFormReducer";
 
 import Header from "components/common/Header";
 
 import PersonalDetails from "./PersonalDetails";
+import AccountDetails from "./AccountDetails";
+import GenderSelect from "./GenderSelect";
 
 const Main = styled.main`
+  padding: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,23 +18,30 @@ const Main = styled.main`
 const RegisterForm = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 15px;
 `;
 
 export default function RegisterPage() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { firstName, lastName, mail, password, gender } = state;
+
+  const onRegisterFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <>
       <Header />
       <Main>
-        <RegisterForm>
+        <RegisterForm onSubmit={onRegisterFormSubmit}>
           <PersonalDetails
             firstName={firstName}
             lastName={lastName}
-            setFirstName={setFirstName}
-            setLastName={setLastName}
+            dispatch={dispatch}
           />
+          <AccountDetails mail={mail} password={password} dispatch={dispatch} />
+          <GenderSelect gender={gender} dispatch={dispatch} />
         </RegisterForm>
       </Main>
     </>

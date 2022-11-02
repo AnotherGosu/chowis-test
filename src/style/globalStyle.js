@@ -17,4 +17,11 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Inter', sans-serif;
     font-size: 14px;
   }
+
+  button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+  }
 `;
