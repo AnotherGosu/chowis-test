@@ -46,9 +46,9 @@ export default function Header() {
 
       <SignButtonsWrapper>
         {isRegisterPage ? (
-          <ButtonLink text="Home" path="/" isWhite />
+          <ButtonLink text="Home" path="/" variant="outline" />
         ) : (
-          <ButtonLink text="Sing Up" path="/register" isWhite />
+          <ButtonLink text="Sing Up" path="/register" variant="outline" />
         )}
         <Button text="Sign In" onClick={toggleModal} />
       </SignButtonsWrapper>

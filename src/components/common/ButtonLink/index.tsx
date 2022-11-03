@@ -4,16 +4,20 @@ import { Link } from "react-router-dom";
 type ButtonLinkProps = {
   text: string;
   path: string;
-  isWhite?: boolean;
+  variant?: "filled" | "outline";
   width?: string;
 };
 
-const StyledLink = styled(Link)<{ isWhite: boolean; width: string }>`
+const StyledLink = styled(Link)<{
+  variant: "filled" | "outline";
+  width: string;
+}>`
   padding: 12px 15px;
   width: ${(props) => props.width};
-  background-color: ${(props) =>
-    props.isWhite ? "#ffffff" : props.theme["pr-600"]};
-  color: ${(props) => (props.isWhite ? props.theme["pr-600"] : "#ffffff")};
+  background-color: ${({ variant, theme }) =>
+    variant === "filled" ? theme["pr-600"] : "#ffffff"};
+  color: ${({ variant, theme }) =>
+    variant === "filled" ? "#ffffff" : theme["pr-600"]};
   font-size: 14px;
   font-weight: 500;
   font-family: "Inter", sans-serif;
@@ -25,10 +29,15 @@ const StyledLink = styled(Link)<{ isWhite: boolean; width: string }>`
   transition: ${(props) => props.theme["transition-main"]};
 
   :hover {
-    background-color: ${(props) =>
-      props.isWhite ? "#ffffff" : props.theme["pr-700"]};
-    border-color: ${(props) =>
-      props.isWhite ? props.theme["pr-600"] : "transparent"};
+    background-color: ${({ variant, theme }) =>
+      variant === "filled" ? theme["pr-700"] : "#ffffff"};
+    border-color: ${({ variant, theme }) =>
+      variant === "filled" ? "transparent" : theme["pr-600"]};
+  }
+
+  :active {
+    background-color: ${({ variant, theme }) =>
+      variant === "filled" ? theme["pr-800"] : theme["gs-50"]};
   }
 `;
 
@@ -37,11 +46,11 @@ const StyledLink = styled(Link)<{ isWhite: boolean; width: string }>`
 export default function ButtonLink({
   text,
   path,
-  isWhite = false,
+  variant = "filled",
   width = "max-content",
 }: ButtonLinkProps) {
   return (
-    <StyledLink to={path} isWhite={isWhite} width={width}>
+    <StyledLink to={path} variant={variant} width={width}>
       {text}
     </StyledLink>
   );

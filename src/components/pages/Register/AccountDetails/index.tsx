@@ -58,6 +58,7 @@ export default function AccountDetails({
         placeholder="Enter Password"
         type="password"
         icon={InputPasswordIcon}
+        showEyeIcon
       />
     </AccountDetailsWrapper>
   );

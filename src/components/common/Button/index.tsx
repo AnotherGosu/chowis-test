@@ -3,16 +3,20 @@ import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  isWhite?: boolean;
+  variant?: "filled" | "outline";
   width?: string;
 }
 
-const StyledButton = styled.button<{ isWhite: boolean; width: string }>`
+const StyledButton = styled.button<{
+  variant: "filled" | "outline";
+  width: string;
+}>`
   padding: 12px 15px;
   width: ${(props) => props.width};
-  background-color: ${(props) =>
-    props.isWhite ? "#ffffff" : props.theme["pr-600"]};
-  color: ${(props) => (props.isWhite ? props.theme["pr-600"] : "#ffffff")};
+  background-color: ${({ variant, theme }) =>
+    variant === "filled" ? theme["pr-600"] : "#ffffff"};
+  color: ${({ variant, theme }) =>
+    variant === "filled" ? "#ffffff" : theme["pr-600"]};
   font-size: 14px;
   font-weight: 500;
   font-family: "Inter", sans-serif;
@@ -21,21 +25,26 @@ const StyledButton = styled.button<{ isWhite: boolean; width: string }>`
   transition: ${(props) => props.theme["transition-main"]};
 
   :hover {
-    background-color: ${(props) =>
-      props.isWhite ? "#ffffff" : props.theme["pr-700"]};
-    border-color: ${(props) =>
-      props.isWhite ? props.theme["pr-600"] : "transparent"};
+    background-color: ${({ variant, theme }) =>
+      variant === "filled" ? theme["pr-700"] : "#ffffff"};
+    border-color: ${({ variant, theme }) =>
+      variant === "filled" ? "transparent" : theme["pr-600"]};
+  }
+
+  :active {
+    background-color: ${({ variant, theme }) =>
+      variant === "filled" ? theme["pr-800"] : "#F4F4F4"};
   }
 `;
 
 export default function Button({
   text,
-  isWhite = false,
+  variant = "filled",
   width = "max-content",
   ...rest
 }: ButtonProps) {
   return (
-    <StyledButton isWhite={isWhite} width={width} type="button" {...rest}>
+    <StyledButton variant={variant} width={width} type="button" {...rest}>
       {text}
     </StyledButton>
   );

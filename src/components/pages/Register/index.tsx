@@ -7,6 +7,8 @@ import Header from "components/common/Header";
 import PersonalDetails from "./PersonalDetails";
 import AccountDetails from "./AccountDetails";
 import GenderSelect from "./GenderSelect";
+import IndividualOptions from "./IndividualOptions";
+import Checkboxes from "./Checkboxes";
 
 const Main = styled.main`
   padding: 30px;
@@ -24,7 +26,17 @@ const RegisterForm = styled.form`
 
 export default function RegisterPage() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { firstName, lastName, mail, password, gender } = state;
+  const {
+    firstName,
+    lastName,
+    mail,
+    password,
+    gender,
+    birthYear,
+    skinGroup,
+    ethnicity,
+    agrees,
+  } = state;
 
   const onRegisterFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,6 +54,13 @@ export default function RegisterPage() {
           />
           <AccountDetails mail={mail} password={password} dispatch={dispatch} />
           <GenderSelect gender={gender} dispatch={dispatch} />
+          <IndividualOptions
+            birthYear={birthYear}
+            skinGroup={skinGroup}
+            ethnicity={ethnicity}
+            dispatch={dispatch}
+          />
+          <Checkboxes agrees={agrees} dispatch={dispatch} />
         </RegisterForm>
       </Main>
     </>

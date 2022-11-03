@@ -9,7 +9,7 @@ export const initialState = {
   birthYear: "",
   skinGroup: "",
   ethnicity: "",
-  agrees: { news: false, licence: false, privacy: false },
+  agrees: { news: false, license: false, privacy: false },
 };
 
 export function reducer(

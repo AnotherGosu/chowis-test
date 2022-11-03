@@ -14,4 +14,4 @@ export type REGISTER_FORM_ACTIONTYPE =
       type: "setUserData";
       payload: { name: keyof typeof REGISTER_FORM_FIELD_NAMES; value: string };
     }
-  | { type: "setAgrees"; payload: "news" | "licence" | "privacy" };
+  | { type: "setAgrees"; payload: "news" | "license" | "privacy" };

@@ -19,6 +19,18 @@ const GenderSelectWrapper = styled.div`
   border-radius: 10px;
 `;
 
+const StyledGenderMaleIcon = styled(GenderMaleIcon)<{ isActive?: boolean }>`
+  path:first-child {
+    fill: ${({ isActive }) => (isActive ? "#0DA883" : "#7C7C7C")};
+  }
+`;
+
+const StyledGenderFemaleIcon = styled(GenderFemaleIcon)<{ isActive?: boolean }>`
+  path:first-child {
+    fill: ${({ isActive }) => (isActive ? "#0DA883" : "#7C7C7C")};
+  }
+`;
+
 const Title = styled.span`
   grid-column: -1 / 1;
 `;
@@ -36,6 +48,11 @@ const GenderButton = styled.button<{ isActive?: boolean }>`
   background: ${({ isActive, theme }) =>
     isActive ? theme["pr-600"] : "#cdcdcd"};
   transition: ${({ theme }) => theme["transition-main"]};
+
+  :hover {
+    background-color: ${({ theme, isActive }) =>
+      isActive ? theme["pr-600"] : theme["pr-500"]};
+  }
 `;
 
 export default function GenderSelect({ gender, dispatch }: GenderSelectProps) {
@@ -52,15 +69,20 @@ export default function GenderSelect({ gender, dispatch }: GenderSelectProps) {
   return (
     <GenderSelectWrapper>
       <Title>Select Gender</Title>
-      <GenderButton isActive={gender === "male"} onClick={onMaleButtonClick}>
-        <GenderMaleIcon />
+      <GenderButton
+        isActive={gender === "male"}
+        onClick={onMaleButtonClick}
+        type="button"
+      >
+        <StyledGenderMaleIcon isActive={gender === "male"} />
         <span>Male</span>
       </GenderButton>
       <GenderButton
         isActive={gender === "female"}
         onClick={onFemaleButtonClick}
+        type="button"
       >
-        <GenderFemaleIcon />
+        <StyledGenderFemaleIcon isActive={gender === "female"} />
         <span>Female</span>
       </GenderButton>
     </GenderSelectWrapper>
