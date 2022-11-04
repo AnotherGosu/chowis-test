@@ -26,5 +26,3 @@ export const newsCheckboxText =
 
 export const licenseCheckboxText =
   "I agree that my E-mail address will be used to receive the license termination/renewal notice from Chowis Co., Ltd.";
-
-export const privacyCheckboxText = "I agree to the PRIVACY POLICY";

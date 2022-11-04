@@ -1,7 +1,8 @@
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "style/globalStyle";
 import { theme } from "style/theme";
-import { ModalContextProvider } from "../context/modalContext";
+import { ModalContextProvider } from "context/modalContext";
+import { AuthContextProvider } from "context/authContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "components/pages/Home";
@@ -20,11 +21,13 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <ModalContextProvider>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </ModalContextProvider>
+    <AuthContextProvider>
+      <ModalContextProvider>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </ModalContextProvider>
+    </AuthContextProvider>
   );
 }

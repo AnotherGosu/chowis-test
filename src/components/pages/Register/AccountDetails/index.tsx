@@ -51,6 +51,7 @@ export default function AccountDetails({
         placeholder="Enter Email Address"
         type="email"
         icon={InputMailIcon}
+        required
       />
       <Input
         value={password}
@@ -59,6 +60,7 @@ export default function AccountDetails({
         type="password"
         icon={InputPasswordIcon}
         showEyeIcon
+        required
       />
     </AccountDetailsWrapper>
   );

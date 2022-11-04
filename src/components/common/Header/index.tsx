@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { useModalContext } from "context/modalContext";
+import { useAuthContext } from "context/authContext";
 
-import Button from "components/common/Button";
-import ButtonLink from "components/common/ButtonLink";
 import HamburgerButton from "./components/HamburgerButton";
 import LoginModal from "./components/LoginModal";
+
+import AuthorizationButtons from "./components/AuthorizationButtons";
+import AuthorizedUser from "./components/AuthorizedUser";
 
 const StyledHeader = styled.header`
   position: relative;
@@ -31,8 +33,9 @@ const CurrentPageDescription = styled.span`
 `;
 
 export default function Header() {
-  const { isModalVisible, toggleModal } = useModalContext();
+  const { isModalVisible } = useModalContext();
   const { pathname } = useLocation();
+  const { isAuthorized } = useAuthContext();
 
   const isRegisterPage = pathname === "/register";
 
@@ -45,12 +48,7 @@ export default function Header() {
       </CurrentPageDescription>
 
       <SignButtonsWrapper>
-        {isRegisterPage ? (
-          <ButtonLink text="Home" path="/" variant="outline" />
-        ) : (
-          <ButtonLink text="Sing Up" path="/register" variant="outline" />
-        )}
-        <Button text="Sign In" onClick={toggleModal} />
+        {isAuthorized ? <AuthorizedUser /> : <AuthorizationButtons />}
       </SignButtonsWrapper>
       {isModalVisible && <LoginModal />}
     </StyledHeader>

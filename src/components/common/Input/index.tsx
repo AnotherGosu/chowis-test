@@ -10,13 +10,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const StyledLabel = styled.label<{
   icon?: string;
+  required?: boolean;
 }>`
   position: relative;
 
   ::before {
     position: absolute;
     top: 50%;
-    left: 12px;
+    left: 22px;
     transform: translateY(-50%);
     display: block;
     content: "";
@@ -25,10 +26,23 @@ const StyledLabel = styled.label<{
     background: ${({ icon }) =>
       icon ? `no-repeat center url(${icon})` : "none"};
   }
+
+  ::after {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    display: ${({ required }) => (required ? "block" : "none")};
+    content: "*";
+    color: #ff0000;
+    font-size: 24px;
+  }
 `;
 
-const StyledInput = styled.input<{ variant?: "filled" | "outline" }>`
-  padding: 12px 50px;
+const StyledInput = styled.input<{
+  variant?: "filled" | "outline";
+}>`
+  padding: 12px 55px;
   border: none;
   outline: none;
   border-radius: 12px;
@@ -69,6 +83,7 @@ export default function Input({
   variant = "outline",
   type,
   showEyeIcon,
+  required,
   ...rest
 }: InputProps) {
   const [passwordType, setPasswordType] = useState("password");
@@ -80,8 +95,13 @@ export default function Input({
   const inputType = showEyeIcon ? passwordType : type;
 
   return (
-    <StyledLabel icon={icon}>
-      <StyledInput variant={variant} type={inputType} {...rest} />
+    <StyledLabel icon={icon} required={!!required}>
+      <StyledInput
+        variant={variant}
+        type={inputType}
+        required={required}
+        {...rest}
+      />
       {showEyeIcon && <StyledEyeIcon onClick={onEyeIconClick} />}
     </StyledLabel>
   );

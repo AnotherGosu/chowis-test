@@ -6,12 +6,29 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   isChecked: boolean;
 }
 
-const CheckboxLabel = styled.label`
+const CheckboxLabel = styled.label<{ required?: boolean }>`
+  position: relative;
   display: grid;
-  grid-template-columns: 20px 1fr;
+  grid-template-columns: 34px 1fr;
   gap: 7px;
   font-weight: 500;
   color: #7c7c7c;
+
+  ::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: ${({ required }) => (required ? "block" : "none")};
+    content: "*";
+    color: #ff0000;
+    font-size: 24px;
+  }
+`;
+
+const AsideWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
 `;
 
 const StyledCheckbox = styled.input`
@@ -21,34 +38,40 @@ const StyledCheckbox = styled.input`
   border: 2px solid #7c7c7c;
   border-radius: 4px;
   background-color: #fff;
+  /* background-color: ${(props) => props.theme["pr-600"]}; */
   display: grid;
   place-content: center;
   align-self: flex-start;
   cursor: pointer;
+  transition: ${(props) => props.theme["transition-main"]};
 
-  ::before {
-    content: "";
-    width: 10px;
-    height: 10px;
+  :checked {
     background-color: ${(props) => props.theme["pr-600"]};
-    border-radius: 1px;
-    transition: 120ms transform ease-in-out;
-    transform: scale(0);
   }
+`;
 
-  :checked::before {
-    transform: scale(1);
-  }
+const RequiredStar = styled.span`
+  color: #ff0000;
+  font-size: 24px;
 `;
 
 export default function Checkbox({
   children,
   isChecked,
+  required,
   ...rest
 }: CheckboxProps) {
   return (
-    <CheckboxLabel>
-      <StyledCheckbox type="checkbox" checked={isChecked} {...rest} />
+    <CheckboxLabel required={required}>
+      <AsideWrapper>
+        {required && <RequiredStar>*</RequiredStar>}
+        <StyledCheckbox
+          type="checkbox"
+          checked={isChecked}
+          required={required}
+          {...rest}
+        />
+      </AsideWrapper>
       {children}
     </CheckboxLabel>
   );

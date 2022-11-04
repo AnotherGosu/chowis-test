@@ -1,9 +1,5 @@
 import styled from "styled-components";
-import {
-  newsCheckboxText,
-  licenseCheckboxText,
-  privacyCheckboxText,
-} from "static/constants";
+import { newsCheckboxText, licenseCheckboxText } from "static/constants";
 import { REGISTER_FORM_ACTIONTYPE } from "types/actionTypes";
 
 import Checkbox from "components/common/Checkbox";
@@ -17,6 +13,17 @@ const CheckboxesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+`;
+
+const PrivacyTextWrapper = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
+const PrivacyLink = styled.a`
+  color: #007aeb;
+  font-weight: 700;
+  text-decoration: none;
 `;
 
 export default function Checkboxes({ agrees, dispatch }: CheckboxesProps) {
@@ -43,6 +50,7 @@ export default function Checkboxes({ agrees, dispatch }: CheckboxesProps) {
         name="register-license"
         isChecked={license}
         onChange={onLicenseCheckboxChange}
+        required
       >
         <span>{licenseCheckboxText}</span>
       </Checkbox>
@@ -50,8 +58,12 @@ export default function Checkboxes({ agrees, dispatch }: CheckboxesProps) {
         name="register-privacy"
         isChecked={privacy}
         onChange={onPrivacyCheckboxChange}
+        required
       >
-        <span>{privacyCheckboxText}</span>
+        <PrivacyTextWrapper>
+          <span>I agree to the</span>
+          <PrivacyLink href="/">PRIVACY POLICY</PrivacyLink>
+        </PrivacyTextWrapper>
       </Checkbox>
     </CheckboxesWrapper>
   );
