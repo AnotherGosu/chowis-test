@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { device } from "style/breakpoints";
+
 import { ReactComponent as TemperatureIcon } from "images/temperature-icon.svg";
 import { ReactComponent as HumidityIcon } from "images/humidity-icon.svg";
 import { ReactComponent as UVIndexIcon } from "images/uvindex-icon.svg";
@@ -9,8 +11,19 @@ import GeoConditionCard from "./components/GeoConditionCard";
 const GeoConditionCardsWrapper = styled.div`
   margin: 100px 0 25px 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  justify-content: center;
   gap: 12px;
+
+  @media ${device.mobile} {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media ${device.laptop} {
+    width: 100%;
+    grid-template-columns: repeat(4, 257px);
+    gap: 40px;
+  }
 `;
 
 export default function LocationCards() {

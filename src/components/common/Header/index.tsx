@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { useModalContext } from "context/modalContext";
 import { useAuthContext } from "context/authContext";
+import { device } from "style/breakpoints";
 
 import HamburgerButton from "./components/HamburgerButton";
 import LoginModal from "./components/LoginModal";
@@ -17,6 +18,10 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   background-color: ${(props) => props.theme["gs-50"]};
+
+  @media ${device.laptop} {
+    padding: 30px 55px;
+  }
 `;
 
 const SignButtonsWrapper = styled.div`

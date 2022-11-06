@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
+import useAuthorizedRedirect from "hooks/useAuthorizedRedirect";
+import { useModalContext } from "context/modalContext";
 
 import InputMailIcon from "images/input-mail-icon.svg";
 import InputPasswordIcon from "images/input-password-icon.svg";
@@ -32,6 +34,11 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const authorizedRedirect = useAuthorizedRedirect();
+  const { toggleModal } = useModalContext();
+
+  const isButtonDisabled = !email || !password;
+
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
   };
@@ -42,6 +49,8 @@ export default function LoginForm() {
 
   const onLoginFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    authorizedRedirect();
+    toggleModal();
   };
 
   return (
@@ -67,7 +76,7 @@ export default function LoginForm() {
           variant="filled"
         />
       </InputsWrapper>
-      <Button text="Login" width="300px" type="submit" />
+      <Button text="Login" type="submit" disabled={isButtonDisabled} />
     </LoginFormContainer>
   );
 }

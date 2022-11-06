@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState, useRef } from "react";
 import useOutsideClick from "hooks/useOutsideClick";
 import { ReactComponent as SelectArrowIcon } from "images/select-arrow-icon.svg";
+import { device } from "style/breakpoints";
 
 type SelectProps = {
   title: string;
@@ -12,6 +13,7 @@ type SelectProps = {
 
 const SelectWrapper = styled.div`
   position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -24,8 +26,6 @@ const SelectTitle = styled.span`
 
 const SelectButton = styled.button`
   padding: 15px;
-  width: 100%;
-  min-width: 115px;
   display: grid;
   grid-template-columns: 1fr 12px;
   justify-content: center;
@@ -37,6 +37,10 @@ const SelectButton = styled.button`
   font-size: 14px;
   color: #ffffff;
   background-color: ${(props) => props.theme["pr-600"]};
+
+  @media ${device.laptop} {
+    font-size: 18px;
+  }
 `;
 
 const SelectOptions = styled.ul`

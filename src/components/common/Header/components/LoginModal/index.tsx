@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useModalContext } from "context/modalContext";
 import { ReactComponent as ModalCloseIcon } from "images/modal-close-icon.svg";
+import { device } from "style/breakpoints";
 
 import LoginForm from "./components/LoginForm";
 import AlternativeLoginMethods from "./components/AlternativeLoginMethods";
@@ -25,7 +26,8 @@ const StyledModal = styled.div`
 const ModalContent = styled.div`
   position: relative;
   padding: 45px;
-  width: 386px;
+  width: 100%;
+  max-width: 386px;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
@@ -33,6 +35,10 @@ const ModalContent = styled.div`
   border-radius: 30px;
   color: #1a1d1f;
   font-weight: 600;
+
+  @media ${device.laptop} {
+    max-width: 416px;
+  }
 `;
 
 const CloseButton = styled.button`

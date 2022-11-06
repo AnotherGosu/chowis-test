@@ -1,8 +1,26 @@
+import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { useModalContext } from "context/modalContext";
+import { device } from "style/breakpoints";
 
 import Button from "components/common/Button";
 import ButtonLink from "components/common/ButtonLink";
+
+const SignUpButtonLink = styled(ButtonLink)`
+  @media ${device.laptop} {
+    padding: 15px 26px;
+    font-weight: 700;
+    font-size: 20px;
+  }
+`;
+
+const SignInButton = styled(Button)`
+  @media ${device.laptop} {
+    padding: 15px 26px;
+    font-weight: 700;
+    font-size: 20px;
+  }
+`;
 
 export default function AuthorizationButtons() {
   const { toggleModal } = useModalContext();
@@ -12,11 +30,11 @@ export default function AuthorizationButtons() {
   return (
     <>
       {isRegisterPage ? (
-        <ButtonLink text="Home" path="/" variant="outline" />
+        <SignUpButtonLink text="Home" to="/" variant="outline" />
       ) : (
-        <ButtonLink text="Sing Up" path="/register" variant="outline" />
+        <SignUpButtonLink text="Sing Up" to="/register" variant="outline" />
       )}
-      <Button text="Sign In" onClick={toggleModal} />
+      <SignInButton text="Sign In" onClick={toggleModal} />
     </>
   );
 }

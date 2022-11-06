@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { REGISTER_FORM_ACTIONTYPE } from "types/actionTypes";
+import { device } from "style/breakpoints";
 
 import InputUserIcon from "images/input-user-icon.svg";
 
@@ -12,14 +13,25 @@ type PersonalDetailsProps = {
 };
 
 const PersonalDetailsWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  @media ${device.laptop} {
+    display: grid;
+    grid-template-columns: 330px 436px;
+    gap: 8px;
+  }
 `;
 
 const Description = styled.span`
   font-size: 16px;
   color: #55b692;
+
+  @media ${device.laptop} {
+    grid-column: -1 /1;
+  }
 `;
 
 export default function PersonalDetails({

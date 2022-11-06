@@ -11,8 +11,7 @@ const StyledButton = styled.button<{
   variant: "filled" | "outline";
   width: string;
 }>`
-  padding: 12px 15px;
-  width: ${(props) => props.width};
+  padding: 12px 18px;
   background-color: ${({ variant, theme }) =>
     variant === "filled" ? theme["pr-600"] : "#ffffff"};
   color: ${({ variant, theme }) =>
@@ -34,6 +33,10 @@ const StyledButton = styled.button<{
   :active {
     background-color: ${({ variant, theme }) =>
       variant === "filled" ? theme["pr-800"] : "#F4F4F4"};
+  }
+
+  :disabled {
+    background-color: #cdcdcd;
   }
 `;
 

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { useReducer } from "react";
-import { useNavigate } from "react-router-dom";
 import { reducer, initialState } from "./registerFormReducer";
-import { useAuthContext } from "context/authContext";
+import useAuthorizedRedirect from "hooks/useAuthorizedRedirect";
+import { device } from "style/breakpoints";
 
 import Header from "components/common/Header";
+import MainLayout from "components/common/MainLayout";
 import Button from "components/common/Button";
 import Credits from "components/common/Credits";
 
@@ -14,27 +15,29 @@ import GenderSelect from "./GenderSelect";
 import IndividualOptions from "./IndividualOptions";
 import Checkboxes from "./Checkboxes";
 
-const Main = styled.main`
-  padding: 30px 35px 20px;
-  height: calc(100vh - 83px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: ${(props) => props.theme["pr-600"]};
-`;
-
 const RegisterForm = styled.form`
   max-width: 353px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
+
+  @media ${device.laptop} {
+    max-width: 774px;
+  }
+`;
+
+const SaveButton = styled(Button)`
+  width: 100%;
+
+  @media ${device.laptop} {
+    max-width: 582px;
+  }
 `;
 
 export default function RegisterPage() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { setIsAuthorized } = useAuthContext();
-  const navigate = useNavigate();
+  const authorizedRedirect = useAuthorizedRedirect();
 
   const {
     firstName,
@@ -50,14 +53,16 @@ export default function RegisterPage() {
 
   const onRegisterFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsAuthorized(true);
-    navigate("/");
+    authorizedRedirect();
   };
+
+  const isSubmitButtonDisabled =
+    !password || !mail || !gender || !agrees.privacy || !agrees.license;
 
   return (
     <>
       <Header />
-      <Main>
+      <MainLayout>
         <RegisterForm onSubmit={onRegisterFormSubmit}>
           <PersonalDetails
             firstName={firstName}
@@ -73,10 +78,14 @@ export default function RegisterPage() {
             dispatch={dispatch}
           />
           <Checkboxes agrees={agrees} dispatch={dispatch} />
-          <Button text="Save" type="submit" width="353px" />
+          <SaveButton
+            text="Save"
+            type="submit"
+            disabled={isSubmitButtonDisabled}
+          />
         </RegisterForm>
         <Credits />
-      </Main>
+      </MainLayout>
     </>
   );
 }

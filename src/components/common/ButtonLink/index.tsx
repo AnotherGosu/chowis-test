@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, LinkProps } from "react-router-dom";
 
-type ButtonLinkProps = {
+interface ButtonLinkProps extends LinkProps {
   text: string;
-  path: string;
   variant?: "filled" | "outline";
   width?: string;
-};
+}
 
 const StyledLink = styled(Link)<{
   variant: "filled" | "outline";
@@ -45,12 +44,12 @@ const StyledLink = styled(Link)<{
 // They have the same style but act differently
 export default function ButtonLink({
   text,
-  path,
   variant = "filled",
   width = "max-content",
+  ...rest
 }: ButtonLinkProps) {
   return (
-    <StyledLink to={path} variant={variant} width={width}>
+    <StyledLink variant={variant} width={width} {...rest}>
       {text}
     </StyledLink>
   );

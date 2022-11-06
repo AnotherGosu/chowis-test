@@ -13,6 +13,7 @@ const StyledLabel = styled.label<{
   required?: boolean;
 }>`
   position: relative;
+  width: 100%;
 
   ::before {
     position: absolute;
@@ -42,7 +43,8 @@ const StyledLabel = styled.label<{
 const StyledInput = styled.input<{
   variant?: "filled" | "outline";
 }>`
-  padding: 12px 55px;
+  padding: 12px 12px 12px 55px;
+  width: 100%;
   border: none;
   outline: none;
   border-radius: 12px;

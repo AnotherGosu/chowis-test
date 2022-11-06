@@ -5,6 +5,7 @@ import {
   ethnicitySelectOptions,
 } from "static/constants";
 import { REGISTER_FORM_ACTIONTYPE } from "types/actionTypes";
+import { device } from "style/breakpoints";
 
 import Select from "components/common/Select";
 
@@ -16,10 +17,15 @@ type IndividualOptionsProps = {
 };
 
 const IndividualOptionsWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
+
+  @media ${device.laptop} {
+    gap: 27px;
+  }
 `;
 
 export default function IndividualOptions({

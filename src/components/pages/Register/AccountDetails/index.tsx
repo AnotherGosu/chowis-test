@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { REGISTER_FORM_ACTIONTYPE } from "types/actionTypes";
+import { device } from "style/breakpoints";
 
 import InputMailIcon from "images/input-mail-icon.svg";
 import InputPasswordIcon from "images/input-password-icon.svg";
@@ -13,14 +14,25 @@ type AccountDetailsProps = {
 };
 
 const AccountDetailsWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  @media ${device.laptop} {
+    display: grid;
+    grid-template-columns: 330px 436px;
+    gap: 8px;
+  }
 `;
 
 const Description = styled.span`
   font-size: 16px;
   color: #55b692;
+
+  @media ${device.laptop} {
+    grid-column: -1 /1;
+  }
 `;
 
 export default function AccountDetails({

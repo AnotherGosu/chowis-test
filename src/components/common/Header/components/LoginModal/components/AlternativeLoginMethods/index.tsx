@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "style/breakpoints";
 import { ReactComponent as GmailIcon } from "images/gmail-icon.svg";
 import { ReactComponent as KakaoIcon } from "images/kakao-icon.svg";
 
