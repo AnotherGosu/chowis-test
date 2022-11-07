@@ -1,3 +1,9 @@
+import { ReactComponent as LinkHomeIcon } from "images/link-home-icon.svg";
+import { ReactComponent as LinkProfileIcon } from "images/link-profile-icon.svg";
+import { ReactComponent as LinkShopIcon } from "images/link-shop-icon.svg";
+import { ReactComponent as LinkHistoryIcon } from "images/link-history-icon.svg";
+import { ReactComponent as LinkHomepageIcon } from "images/link-homepage-icon.svg";
+
 const birthYears = Array.from(Array(2004 - 1950 + 1).keys()).map(
   (x) => x + 1950
 );
@@ -26,3 +32,11 @@ export const newsCheckboxText =
 
 export const licenseCheckboxText =
   "I agree that my E-mail address will be used to receive the license termination/renewal notice from Chowis Co., Ltd.";
+
+export const sideMenuLinks = [
+  { text: "Home", to: "/", Icon: LinkHomeIcon },
+  { text: "Profile", to: "/", Icon: LinkProfileIcon },
+  { text: "Shop", to: "/", Icon: LinkShopIcon },
+  { text: "History", to: "/", Icon: LinkHistoryIcon },
+  { text: "Homepage", to: "/", Icon: LinkHomepageIcon },
+];

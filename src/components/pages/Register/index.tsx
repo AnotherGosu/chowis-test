@@ -7,7 +7,6 @@ import { device } from "style/breakpoints";
 import Header from "components/common/Header";
 import MainLayout from "components/common/MainLayout";
 import Button from "components/common/Button";
-import Credits from "components/common/Credits";
 
 import PersonalDetails from "./PersonalDetails";
 import AccountDetails from "./AccountDetails";
@@ -84,7 +83,6 @@ export default function RegisterPage() {
             disabled={isSubmitButtonDisabled}
           />
         </RegisterForm>
-        <Credits />
       </MainLayout>
     </>
   );

@@ -1,27 +1,10 @@
 import styled from "styled-components";
-import { useModalContext } from "context/modalContext";
-import { ReactComponent as ModalCloseIcon } from "images/modal-close-icon.svg";
 import { device } from "style/breakpoints";
+
+import { Modal, CloseModalButton } from "components/common/Modal";
 
 import LoginForm from "./components/LoginForm";
 import AlternativeLoginMethods from "./components/AlternativeLoginMethods";
-
-const StyledModal = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 20px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(30px);
-  z-index: 100;
-`;
 
 const ModalContent = styled.div`
   position: relative;
@@ -30,6 +13,8 @@ const ModalContent = styled.div`
   max-width: 386px;
   display: flex;
   flex-direction: column;
+  align-self: center;
+  justify-self: center;
   background-color: #ffffff;
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.15);
   border-radius: 30px;
@@ -41,16 +26,6 @@ const ModalContent = styled.div`
   }
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 17px;
-  right: 17px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  background-color: transparent;
-`;
-
 const Divider = styled.div`
   margin: 45px 0;
   width: 100%;
@@ -59,24 +34,20 @@ const Divider = styled.div`
   border-radius: 2px;
 `;
 
+const CloseLoginModalButton = styled(CloseModalButton)`
+  top: 17px;
+  right: 17px;
+`;
+
 export default function LoginModal() {
-  const { toggleModal } = useModalContext();
-
-  const onContentClick = (e: React.FormEvent<HTMLDivElement>) => {
-    //Prevent modal closing on children click
-    e.stopPropagation();
-  };
-
   return (
-    <StyledModal onClick={toggleModal}>
-      <ModalContent onClick={onContentClick}>
-        <CloseButton onClick={toggleModal}>
-          <ModalCloseIcon />
-        </CloseButton>
+    <Modal>
+      <ModalContent>
+        <CloseLoginModalButton />
         <LoginForm />
         <Divider />
         <AlternativeLoginMethods />
       </ModalContent>
-    </StyledModal>
+    </Modal>
   );
 }

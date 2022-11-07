@@ -1,13 +1,17 @@
 import { createContext, useContext, useState } from "react";
 
+type ModalNames = "" | "login" | "sideMenu";
+
 interface ModalContextInterface {
-  isModalVisible: boolean;
-  toggleModal: () => void;
+  visibleModal: ModalNames;
+  showModal: (name: ModalNames) => void;
+  hideModal: () => void;
 }
 
 const ModalContext = createContext<ModalContextInterface>({
-  isModalVisible: false,
-  toggleModal: () => {},
+  visibleModal: "",
+  showModal: () => {},
+  hideModal: () => {},
 });
 
 export const useModalContext = () => useContext(ModalContext);
@@ -17,10 +21,11 @@ export function ModalContextProvider({
 }: {
   children?: React.ReactNode;
 }) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const toggleModal = () => setIsModalVisible(!isModalVisible);
+  const [visibleModal, setVisibleModal] = useState<ModalNames>("");
+  const showModal = (modalName: ModalNames) => setVisibleModal(modalName);
+  const hideModal = () => setVisibleModal("");
 
-  const contextValue = { isModalVisible, toggleModal };
+  const contextValue = { visibleModal, showModal, hideModal };
 
   return (
     <ModalContext.Provider value={contextValue}>

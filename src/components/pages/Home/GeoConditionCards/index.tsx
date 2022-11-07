@@ -30,7 +30,7 @@ export default function LocationCards() {
   return (
     <GeoConditionCardsWrapper>
       {geoConditionCards.map((card) => (
-        <GeoConditionCard {...card} />
+        <GeoConditionCard key={card.title} {...card} />
       ))}
     </GeoConditionCardsWrapper>
   );

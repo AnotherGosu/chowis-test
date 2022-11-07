@@ -6,6 +6,7 @@ import { device } from "style/breakpoints";
 
 import HamburgerButton from "./components/HamburgerButton";
 import LoginModal from "./components/LoginModal";
+import SideMenuModal from "./components/SideMenuModal";
 
 import AuthorizationButtons from "./components/AuthorizationButtons";
 import AuthorizedUser from "./components/AuthorizedUser";
@@ -38,11 +39,13 @@ const CurrentPageDescription = styled.span`
 `;
 
 export default function Header() {
-  const { isModalVisible } = useModalContext();
+  const { visibleModal } = useModalContext();
   const { pathname } = useLocation();
   const { isAuthorized } = useAuthContext();
 
   const isRegisterPage = pathname === "/register";
+  const isLoginModalVisible = visibleModal === "login";
+  const isSideMenuModalVisible = visibleModal === "sideMenu";
 
   return (
     <StyledHeader>
@@ -55,7 +58,8 @@ export default function Header() {
       <SignButtonsWrapper>
         {isAuthorized ? <AuthorizedUser /> : <AuthorizationButtons />}
       </SignButtonsWrapper>
-      {isModalVisible && <LoginModal />}
+      {isLoginModalVisible && <LoginModal />}
+      {isSideMenuModalVisible && <SideMenuModal />}
     </StyledHeader>
   );
 }

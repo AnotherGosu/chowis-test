@@ -7,7 +7,6 @@ import GeoConditionCards from "./GeoConditionCards";
 import Header from "components/common/Header";
 import MainLayout from "components/common/MainLayout";
 import Button from "components/common/Button";
-import Credits from "components/common/Credits";
 
 const ContentWrapper = styled.div`
   width: 100%;
@@ -23,12 +22,13 @@ const ContentWrapper = styled.div`
 
 const BeginButton = styled(Button)`
   width: 100%;
+  border-radius: 10px;
+  font-weight: 500;
 
   @media ${device.laptop} {
     max-width: 552px;
     padding: 15px 26px;
     font-size: 20px;
-    font-weight: 700;
   }
 `;
 
@@ -42,7 +42,6 @@ export default function HomePage() {
           <GeoConditionCards />
           <BeginButton text="Let's begin!" />
         </ContentWrapper>
-        <Credits />
       </MainLayout>
     </>
   );

@@ -23,10 +23,13 @@ const SignInButton = styled(Button)`
 `;
 
 export default function AuthorizationButtons() {
-  const { toggleModal } = useModalContext();
+  const { showModal } = useModalContext();
   const { pathname } = useLocation();
 
+  const onSignButtonClick = () => showModal("login");
+
   const isRegisterPage = pathname === "/register";
+
   return (
     <>
       {isRegisterPage ? (
@@ -34,7 +37,7 @@ export default function AuthorizationButtons() {
       ) : (
         <SignUpButtonLink text="Sing Up" to="/register" variant="outline" />
       )}
-      <SignInButton text="Sign In" onClick={toggleModal} />
+      <SignInButton text="Sign In" onClick={onSignButtonClick} />
     </>
   );
 }

@@ -35,7 +35,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
 
   const authorizedRedirect = useAuthorizedRedirect();
-  const { toggleModal } = useModalContext();
+  const { hideModal } = useModalContext();
 
   const isButtonDisabled = !email || !password;
 
@@ -50,7 +50,7 @@ export default function LoginForm() {
   const onLoginFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     authorizedRedirect();
-    toggleModal();
+    hideModal();
   };
 
   return (
