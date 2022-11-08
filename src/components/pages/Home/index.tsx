@@ -6,7 +6,7 @@ import GeoConditionCards from "./GeoConditionCards";
 
 import Header from "components/common/Header";
 import MainLayout from "components/common/MainLayout";
-import Button from "components/common/Button";
+import ButtonLink from "components/common/ButtonLink";
 
 const ContentWrapper = styled.div`
   width: 100%;
@@ -20,7 +20,7 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const BeginButton = styled(Button)`
+const BeginButton = styled(ButtonLink)`
   width: 100%;
   border-radius: 10px;
   font-weight: 500;
@@ -40,7 +40,7 @@ export default function HomePage() {
         <ContentWrapper>
           <Hero />
           <GeoConditionCards />
-          <BeginButton text="Let's begin!" />
+          <BeginButton text="Let's begin!" to="/register" />
         </ContentWrapper>
       </MainLayout>
     </>

@@ -35,13 +35,21 @@ const Title = styled.span`
   }
 `;
 
-const Value = styled.span<{ isLocation?: boolean }>`
+const Value = styled.span`
   grid-column: 1/-1;
-  font-size: ${({ isLocation }) => (isLocation ? "16px" : "30px")};
+  font-size: 30px;
   font-weight: 700;
 
   @media ${device.laptop} {
-    font-size: ${({ isLocation }) => (isLocation ? "28px" : "44px")};
+    font-size: 44px;
+  }
+`;
+
+const LocationValue = styled(Value)`
+  font-size: 16px;
+
+  @media ${device.laptop} {
+    font-size: 22px;
   }
 `;
 
@@ -55,7 +63,11 @@ export default function GeoConditionCard({
     <StyledGeoConditionCard>
       <Title>{title}</Title>
       <Icon />
-      <Value isLocation={isLocation}>{value}</Value>
+      {isLocation ? (
+        <LocationValue>{value}</LocationValue>
+      ) : (
+        <Value>{value}</Value>
+      )}
     </StyledGeoConditionCard>
   );
 }

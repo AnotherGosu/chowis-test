@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { device } from "style/breakpoints";
 
 import SideMenuLinks from "components/common/SideMenuLinks";
+import ControlButtons from "./components/ControlButtons";
 
 type MainLayoutProps = {
   children?: React.ReactNode;
@@ -23,6 +24,22 @@ const Main = styled.main`
   }
 `;
 
+const SidePanelWrapper = styled.div`
+  height: 100%;
+  display: none;
+
+  @media ${device.laptop} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+`;
+
+const StyledSideMenuLinks = styled(SideMenuLinks)`
+  display: flex;
+  align-self: flex-start;
+`;
+
 const Credits = styled.span`
   margin-top: auto;
   font-weight: 700;
@@ -30,19 +47,13 @@ const Credits = styled.span`
   grid-column: -1/1;
 `;
 
-const StyledSideMenuLinks = styled(SideMenuLinks)`
-  align-self: flex-start;
-  display: none;
-
-  @media ${device.laptop} {
-    display: flex;
-  }
-`;
-
 export default function MainLayout({ children, className }: MainLayoutProps) {
   return (
     <Main className={className}>
-      <StyledSideMenuLinks variant="icons" />
+      <SidePanelWrapper>
+        <StyledSideMenuLinks variant="icons" />
+        <ControlButtons />
+      </SidePanelWrapper>
       {children}
       <Credits>Powered by CHOWIS</Credits>
     </Main>

@@ -2,20 +2,21 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { useModalContext } from "context/modalContext";
 import { useAuthContext } from "context/authContext";
-import { device } from "style/breakpoints";
+import { device, windowSizes } from "style/breakpoints";
+import useWindowSize from "hooks/useWindowSize";
+
+import LanguageSelect from "components/common/LanguageSelect";
 
 import HamburgerButton from "./components/HamburgerButton";
 import LoginModal from "./components/LoginModal";
 import SideMenuModal from "./components/SideMenuModal";
-
 import AuthorizationButtons from "./components/AuthorizationButtons";
 import AuthorizedUser from "./components/AuthorizedUser";
 
 const StyledHeader = styled.header`
   position: relative;
   padding: 20px;
-  display: grid;
-  grid-template-columns: max-content max-content 1fr;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: ${(props) => props.theme["gs-50"]};
@@ -25,40 +26,43 @@ const StyledHeader = styled.header`
   }
 `;
 
-const SignButtonsWrapper = styled.div`
-  display: flex;
-  gap: 5px;
-  justify-self: flex-end;
-`;
-
 const CurrentPageDescription = styled.span`
-  margin-left: 20px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 12px;
   color: ${(props) => props.theme["gs-900"]};
+
+  @media ${device.mobile} {
+    font-size: 16px;
+  }
+
+  @media ${device.laptop} {
+    font-size: 20px;
+  }
 `;
 
 export default function Header() {
   const { visibleModal } = useModalContext();
   const { pathname } = useLocation();
   const { isAuthorized } = useAuthContext();
+  const { width } = useWindowSize();
 
   const isRegisterPage = pathname === "/register";
   const isLoginModalVisible = visibleModal === "login";
   const isSideMenuModalVisible = visibleModal === "sideMenu";
+  const isLaptop = width >= windowSizes.laptop;
 
   return (
     <StyledHeader>
-      <HamburgerButton />
+      {isLaptop ? <LanguageSelect /> : <HamburgerButton />}
 
-      <CurrentPageDescription>
-        {isRegisterPage ? "User Registration" : ""}
-      </CurrentPageDescription>
+      {isRegisterPage && (
+        <CurrentPageDescription>User Registration</CurrentPageDescription>
+      )}
 
-      <SignButtonsWrapper>
-        {isAuthorized ? <AuthorizedUser /> : <AuthorizationButtons />}
-      </SignButtonsWrapper>
+      {isAuthorized ? <AuthorizedUser /> : <AuthorizationButtons />}
+
       {isLoginModalVisible && <LoginModal />}
+
       {isSideMenuModalVisible && <SideMenuModal />}
     </StyledHeader>
   );

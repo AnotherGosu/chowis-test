@@ -11,7 +11,7 @@ const StyledLink = styled(Link)<{
   variant: "filled" | "outline";
   width: string;
 }>`
-  padding: 12px 15px;
+  padding: 12px 18px;
   width: ${(props) => props.width};
   background-color: ${({ variant, theme }) =>
     variant === "filled" ? theme["pr-600"] : "#ffffff"};
@@ -21,6 +21,7 @@ const StyledLink = styled(Link)<{
   font-weight: 500;
   font-family: "Inter", sans-serif;
   text-decoration: none;
+  text-align: center;
   border: 1px solid transparent;
   border-radius: 8px;
   outline: none;

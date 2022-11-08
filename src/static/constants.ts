@@ -27,6 +27,16 @@ export const ethnicitySelectOptions = [
   { value: "arabic", text: "Arabic" },
 ];
 
+export const languageSelectOptions = [
+  { value: "eng", text: "English" },
+  { value: "kor", text: "한국어" },
+  { value: "jap", text: "日本語" },
+  { value: "chi-sm", text: "简体" },
+  { value: "chi-tr", text: "繁体" },
+  { value: "rus", text: "Pусский" },
+  { value: "fra", text: "Française" },
+];
+
 export const newsCheckboxText =
   "I agree that my E-mail address will be used to receive the news letter and marketing offers on products and services from Chowis Co., Ltd.";
 
@@ -35,8 +45,8 @@ export const licenseCheckboxText =
 
 export const sideMenuLinks = [
   { text: "Home", to: "/", Icon: LinkHomeIcon },
-  { text: "Profile", to: "/", Icon: LinkProfileIcon },
-  { text: "Shop", to: "/", Icon: LinkShopIcon },
-  { text: "History", to: "/", Icon: LinkHistoryIcon },
-  { text: "Homepage", to: "/", Icon: LinkHomepageIcon },
+  { text: "Profile", to: "/register", Icon: LinkProfileIcon },
+  { text: "Shop", to: "", Icon: LinkShopIcon },
+  { text: "History", to: "", Icon: LinkHistoryIcon },
+  { text: "Homepage", to: "", Icon: LinkHomepageIcon },
 ];

@@ -28,9 +28,11 @@ const RegisterForm = styled.form`
 
 const SaveButton = styled(Button)`
   width: 100%;
+  font-size: 16px;
 
   @media ${device.laptop} {
     max-width: 582px;
+    font-size: 20px;
   }
 `;
 
