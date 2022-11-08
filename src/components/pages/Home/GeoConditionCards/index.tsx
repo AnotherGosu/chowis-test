@@ -9,13 +9,14 @@ import { ReactComponent as LocationIcon } from "images/location-icon.svg";
 import GeoConditionCard from "./components/GeoConditionCard";
 
 const GeoConditionCardsWrapper = styled.div`
-  margin: 100px 0 25px 0;
+  margin: 25px 0;
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
   gap: 12px;
 
   @media ${device.mobile} {
+    margin: 100px 0 25px 0;
     grid-template-columns: 1fr 1fr;
   }
 
