@@ -11,12 +11,16 @@ type MainLayoutProps = {
 
 const Main = styled.main`
   padding: 25px 20px;
-  height: calc(100vh - 83px);
+  height: 100%;
   display: grid;
   grid-template-rows: 1fr max-content;
   justify-items: center;
   align-items: center;
   color: ${(props) => props.theme["pr-600"]};
+
+  @media ${device.mobile} {
+    height: calc(100vh - 83px);
+  }
 
   @media ${device.laptop} {
     height: calc(100vh - 116px);
@@ -42,6 +46,7 @@ const StyledSideMenuLinks = styled(SideMenuLinks)`
 
 const Credits = styled.span`
   margin-top: auto;
+  padding-top: 20px;
   font-weight: 700;
   color: #c4c4c4;
   grid-column: -1/1;
